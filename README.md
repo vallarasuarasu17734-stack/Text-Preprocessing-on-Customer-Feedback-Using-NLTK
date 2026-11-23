@@ -37,16 +37,63 @@ To perform fundamental Natural Language Processing (NLP) text preprocessing step
 
 #Step 1: Download NLTK resources
 
+nltk.download('punkt')   
+nltk.download('punkt_tab')  
+nltk.download('stopwords')  
+nltk.download('wordnet')  
+
 #Step 2: Sample customer feedback text
+
+ text = """The product quality is excellent and the delivery service was very fast.
+However, the packaging could have been better."""  
 
 #Step 3: Tokenization
 
+tokens = word_tokenize(text) 
+print("\nTokenized Words:")  
+print(tokens)   
+
 #Step 4: Stopword Removal & Punctuation Filtering
+
+stop_words = set(stopwords.words('english'))  
+
+filtered_tokens = [word for word in tokens
+                   if word.lower() not in stop_words and word.isalpha()]
+
+print("\nAfter Stopword Removal:")  
+
+print(filtered_tokens)  
+
 
 #Step 5: Lemmatization
 
+lemmatizer = WordNetLemmatizer()  
+
+lemmatized_words = [lemmatizer.lemmatize(word.lower())
+                    for word in filtered_tokens]  
+
+print("\nAfter Lemmatization:")
+
+print(lemmatized_words)    
+
 ## Output
 
+The product quality is excellent and the delivery service was very fast.
+However, the packaging could have been better.
 
+Tokenized Words:  
+['The', 'product', 'quality', 'is', 'excellent', 'and',
+'the', 'delivery', 'service', 'was', 'very', 'fast',
+'.', 'However', ',', 'the', 'packaging', 'could',
+'have', 'been', 'better', '.']  
+ 
+After Stopword Removal:  
+['product', 'quality', 'excellent', 'delivery',
+'service', 'fast', 'However', 'packaging', 'could', 'better']  
+  
+After Lemmatization:  
+['product', 'quality', 'excellent', 'delivery',
+'service', 'fast', 'however', 'packaging', 'could', 'better']    
+  
 ## Result
 The program successfully performed tokenization, punctuation filtering, stopword removal, and lemmatization on the customer feedback text using the NLTK library.
